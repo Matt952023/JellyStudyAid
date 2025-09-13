@@ -1,0 +1,105 @@
+/* Container */
+.notepad {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+/* Header row */
+.np-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .5rem;
+}
+.np-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.np-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.np-actions button,
+.np-toolbar button,
+.np-import-label {
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: .4rem .6rem;
+  font-size: .9rem;
+  cursor: pointer;
+}
+.np-import-label { display: inline-flex; align-items: center; gap: .35rem; }
+.np-actions button:hover,
+.np-toolbar button:hover,
+.np-import-label:hover { background: #eef2ff; }
+
+/* Toolbar */
+.np-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin: .5rem 0 .75rem;
+}
+.np-sep {
+  width: 1px; height: 22px;
+  background: #e5e7eb;
+  margin: 0 .25rem;
+}
+
+
+/* Editor */
+.np-editor {
+  min-height: 220px;
+  padding: .9rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  line-height: 1.5;
+  outline: none;
+  /* Preserve multiple spaces and line breaks inside the editor */
+  .np-editor {
+  white-space: pre-wrap;  /* important: keeps sequences of spaces */
+  }
+}
+.np-editor:focus { border-color: #93c5fd; box-shadow: 0 0 0 3px rgba(147,197,253,.35); }
+
+/* --- Header sizes inside the editor --- */
+.np-editor h1 { font-size: 1.8rem; font-weight: 700; margin: 0.6rem 0 0.4rem; }
+.np-editor h2 { font-size: 1.6rem; font-weight: 700; margin: 0.6rem 0 0.4rem; }
+.np-editor h3 { font-size: 1.35rem; font-weight: 600; margin: 0.6rem 0 0.35rem; }
+.np-editor h4 { font-size: 1.2rem; font-weight: 600; margin: 0.5rem 0 0.3rem; }
+.np-editor h5 { font-size: 1.05rem; font-weight: 600; margin: 0.45rem 0 0.25rem; }
+.np-editor h6 { font-size: 0.95rem; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; margin: 0.4rem 0 0.2rem; }
+
+.np-editor p { margin: 0.35rem 0; }
+
+/* Make sure spaces are preserved for your Tab=4 spaces feature */
+.np-editor { white-space: pre-wrap; }
+
+/* --- Style the dropdown to match your UI --- */
+#np-format-block {
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: .35rem .5rem;
+  font-size: .9rem;
+}
+#np-format-block:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(147,197,253,.35);
+}
+
+/* Footer */
+.np-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: #6b7280;
+  margin-top: .6rem;
+}
