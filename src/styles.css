@@ -1,1 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: #d4bfa7;
+}
+header {
+  background: #bd7079;
+  color: white;
+  padding: 1rem;
+  font-size: 3rem;
+  font-family: 'baloo 2';  /* Rounded bubbly font */
 
+  /* Black border around the text */
+  -webkit-text-stroke: 2px black;
+}
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  max-width: 600px;
+  margin: 20px auto;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.day {
+  padding: 15px;
+  background: #eaeaea;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.day:hover {
+  background: #d0e4ff;
+}
+.day.active {
+  background: #4a90e2;
+  color: white;
+}
