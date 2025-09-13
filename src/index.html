@@ -23,7 +23,6 @@
       </div>
 
       <div class="cal-grid">
-        <!-- Weekday labels -->
         <div class="weekday">Sun</div>
         <div class="weekday">Mon</div>
         <div class="weekday">Tue</div>
@@ -31,12 +30,40 @@
         <div class="weekday">Thu</div>
         <div class="weekday">Fri</div>
         <div class="weekday">Sat</div>
-
-        <!-- Days will be injected here -->
         <div id="days" class="days"></div>
       </div>
     </section>
   </main>
+
+  <!-- Modal -->
+  <div id="eventModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__panel" role="document">
+      <div class="modal__header">
+        <h3 id="modalTitle">Events</h3>
+        <button id="closeModal" class="icon-btn" aria-label="Close">✕</button>
+      </div>
+
+      <div id="existingEvents" class="existing-events" aria-live="polite"></div>
+
+      <form id="eventForm" novalidate>
+        <input type="hidden" id="eventDateISO" />
+        <input type="hidden" id="eventId" />
+        <label class="field">
+          <span>Title *</span>
+          <input id="eventTitle" type="text" required maxlength="120" placeholder="e.g., Physics quiz review" />
+        </label>
+        <label class="field">
+          <span>Notes</span>
+          <textarea id="eventNotes" rows="3" placeholder="Optional details…"></textarea>
+        </label>
+        <div class="actions">
+          <button type="submit" id="saveEvent" class="btn primary">Save</button>
+          <button type="button" id="deleteEvent" class="btn danger hidden">Delete</button>
+          <button type="button" id="cancelEvent" class="btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="calendar.js"></script>
 </body>

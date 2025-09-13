@@ -86,20 +86,38 @@ header {
 
 /* Day cells */
 .day {
-  background: var(--muted);
+  background: #eaeaea;
   border-radius: 10px;
-  min-height: 70px;
+  min-height: 88px;
   padding: 8px;
   text-align: right;
-  position: relative;
+  position: relative;      /* NEW: for chips positioning */
   cursor: pointer;
   user-select: none;
   transition: background 0.2s ease, transform 0.02s ease;
   outline: none;
 }
-
-.day:hover { background: var(--muted-2); }
+.day:hover { background: #d0e4ff; }
 .day:active { transform: scale(0.995); }
+.day .num { font-weight: 600; }
+.day.today { box-shadow: inset 0 0 0 3px #4a90e2; }
+.day.faded { opacity: 0.45; }
+
+.day .chips {
+  position: absolute;
+  left: 8px; right: 8px; bottom: 6px;
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-start;
+}
+.chip {
+  max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 0.7rem; line-height: 1.4;
+  padding: 2px 6px; border-radius: 999px;
+  background: #fff; color: #222;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.chip.more { opacity: 0.85; }
 
 /* Number badge */
 .day .num {
@@ -124,3 +142,36 @@ header {
 
 /* Make the whole cell clickable for a11y */
 .day[role="button"] { display: block; }
+
+.modal.hidden { display: none; }
+.modal {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.45);
+  display: grid; place-items: center; padding: 16px;
+}
+.modal__panel {
+  width: min(640px, 100%);
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  padding: 16px;
+}
+.modal__header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.icon-btn { border: none; background: transparent; font-size: 1.25rem; cursor: pointer; }
+.field { display: grid; gap: 6px; margin: 10px 0; }
+.field input, .field textarea { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; font: inherit; background: #fff; }
+.actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+.btn { padding: 8px 12px; border-radius: 10px; border: 1px solid #ccc; background: #f9f9f9; cursor: pointer; }
+.btn.primary { background: #4a90e2; color: #fff; border-color: #4a90e2; }
+.btn.danger { background: #f44336; color: #fff; border-color: #f44336; }
+.btn:hover { filter: brightness(1.05); }
+
+.existing-events { margin: 8px 0 4px; }
+.existing-events .empty { color: #666; font-size: 0.95rem; }
+.event-row {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px;
+  padding: 8px; border: 1px solid #eee; border-radius: 10px; margin: 6px 0; background: #fafafa;
+}
+.event-row .title { font-weight: 600; }
+.row-actions { display: flex; gap: 6px; }
+.row-actions .mini { padding: 4px 8px; border-radius: 8px; border: 1px solid #ddd; background: #fff; cursor: pointer; font-size: 0.85rem; }
+.row-actions .mini.danger { border-color: #f44336; color: #f44336; }
