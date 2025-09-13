@@ -14,8 +14,29 @@
     📚 Study Hub
   </header>
 
-  <h2>Calendar</h2>
-  <div class="calendar" id="calendar"></div>
+  <main class="container">
+    <section class="calendar-card">
+      <div class="cal-header">
+        <button id="prevBtn" aria-label="Previous month">‹</button>
+        <h2 id="monthLabel" aria-live="polite"></h2>
+        <button id="nextBtn" aria-label="Next month">›</button>
+      </div>
+
+      <div class="cal-grid">
+        <!-- Weekday labels -->
+        <div class="weekday">Sun</div>
+        <div class="weekday">Mon</div>
+        <div class="weekday">Tue</div>
+        <div class="weekday">Wed</div>
+        <div class="weekday">Thu</div>
+        <div class="weekday">Fri</div>
+        <div class="weekday">Sat</div>
+
+        <!-- Days will be injected here -->
+        <div id="days" class="days"></div>
+      </div>
+    </section>
+  </main>
 
   <script src="calendar.js"></script>
 </body>
