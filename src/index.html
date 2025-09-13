@@ -5,7 +5,8 @@
   <title>Study Hub</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/calendar.css">
-  <link rel="stylesheet" href="notepad.css">
+  <link rel="stylesheet" href="css/notepad.css">
+  <link rel="stylesheet" href="css/timer.css">
 
   <!-- Add a rounded font (Baloo 2 is playful and bubbly) -->
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
@@ -36,6 +37,88 @@
       </div>
     </section>
   </main>
+
+  <section class="notepad">
+    <div class="np-header">
+      <h2>Notes</h2>
+      <div class="np-actions">
+        <button id="np-undo" aria-label="Undo">↶</button>
+        <button id="np-redo" aria-label="Redo">↷</button>
+        <button id="np-export" aria-label="Export as .txt">Export</button>
+        <label class="np-import-label">
+          Import <input id="np-import" type="file" accept=".txt,.html" hidden>
+        </label>
+        <button id="np-clear" aria-label="Clear all">Clear</button>
+      </div>
+    </div>
+
+    <div class="np-toolbar" role="toolbar" aria-label="Formatting">
+      <select id="np-format-block" aria-label="Text style">
+        <option value="p">Paragraph</option>
+        <option value="h1">Heading 1</option>
+        <option value="h2">Heading 2</option>
+        <option value="h3">Heading 3</option>
+        <option value="h4">Heading 4</option>
+        <option value="h5">Heading 5</option>
+        <option value="h6">Heading 6</option>
+      </select>
+      <span class="np-sep"></span>
+      <button data-cmd="bold"><strong>B</strong></button>
+      <button data-cmd="italic"><em>I</em></button>
+      <button data-cmd="underline"><u>U</u></button>
+      <span class="np-sep"></span>
+      <button data-cmd="insertUnorderedList">• List</button>
+      <button data-cmd="insertOrderedList">1. List</button>
+    </div>
+
+    <!-- The editable area -->
+    <div id="np-editor" class="np-editor" contenteditable="true"
+       aria-label="Notepad editor"></div>
+
+    <div class="np-footer">
+      <span id="np-status">Saved</span>
+      <span id="np-counts">0 words • 0 chars</span>
+    </div>
+  </section>
+
+  <!-- Timer Widget -->
+  <div id="timer-widget" aria-live="polite">
+    <button class="tw-settings" aria-label="Set timer" title="Set timer">⋮</button>
+    <svg class="tw-ring" viewBox="0 0 120 120" aria-hidden="true">
+      <!-- background track -->
+      <circle class="tw-track" cx="60" cy="60" r="52"></circle>
+      <!-- progress ring (animated) -->
+      <circle class="tw-progress" cx="60" cy="60" r="52"></circle>
+    </svg>
+    <div class="tw-time" id="tw-time">25:00</div>
+    <div class="tw-controls">
+      <button id="tw-start" aria-label="Start">▶</button>
+      <button id="tw-pause" aria-label="Pause">⏸</button>
+      <button id="tw-reset" aria-label="Reset">⟲</button>
+    </div>
+
+    <!-- duration dialog -->
+    <dialog id="tw-dialog">
+      <form method="dialog" id="tw-form">
+        <h3>Set Timer</h3>
+        <div class="tw-row">
+          <label>Minutes <input type="number" id="tw-min" min="0" value="25"></label>
+          <label>Seconds <input type="number" id="tw-sec" min="0" max="59" value="0"></label>
+        </div>
+        <div class="tw-presets">
+          <button data-preset="300">5m</button>
+          <button data-preset="1500">25m</button>
+          <button data-preset="1800">30m</button>
+        </div>
+        <menu>
+          <button value="cancel">Cancel</button>
+          <button id="tw-save" value="default">Save</button>
+        </menu>
+      </form>
+    </dialog>
+  </div>
+
+
 
   <!-- Modal -->
   <div id="eventModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -69,5 +152,6 @@
 
   <script src="js/calendar.js"></script>
   <script src="js/notepad.js"></script>
+  <script src="js/timer.js" defer></script>
 </body>
 </html>
