@@ -83,7 +83,7 @@
 
   <!-- Timer Widget -->
   <div id="timer-widget" aria-live="polite">
-    <button class="tw-settings" aria-label="Set timer" title="Set timer">⋮</button>
+    <button type="button" class="tw-settings" aria-label="Set timer" title="Set timer">⋮</button>
     <svg class="tw-ring" viewBox="0 0 120 120" aria-hidden="true">
       <!-- background track -->
       <circle class="tw-track" cx="60" cy="60" r="52"></circle>
@@ -92,9 +92,9 @@
     </svg>
     <div class="tw-time" id="tw-time">25:00</div>
     <div class="tw-controls">
-      <button id="tw-start" aria-label="Start">▶</button>
-      <button id="tw-pause" aria-label="Pause">⏸</button>
-      <button id="tw-reset" aria-label="Reset">⟲</button>
+      <button type="button" id="tw-start" aria-label="Start">▶</button>
+      <button type="button" id="tw-pause" aria-label="Pause">⏸</button>
+      <button type="button" id="tw-reset" aria-label="Reset">⟲</button>
     </div>
 
     <!-- duration dialog -->
@@ -106,9 +106,9 @@
           <label>Seconds <input type="number" id="tw-sec" min="0" max="59" value="0"></label>
         </div>
         <div class="tw-presets">
-          <button data-preset="300">5m</button>
-          <button data-preset="1500">25m</button>
-          <button data-preset="1800">30m</button>
+          <button type="button" data-preset="300">5m</button>
+          <button type="button" data-preset="1500">25m</button>
+          <button type="button" data-preset="1800">30m</button>
         </div>
         <menu>
           <button value="cancel">Cancel</button>
@@ -124,7 +124,6 @@
       <span>AI Quizzer</span>
       <div class="quizzer-actions">
         <button id="quizzer-min">_</button>
-        <button id="quizzer-close">×</button>
       </div>
     </div>
 
@@ -134,22 +133,24 @@
         <button id="export-quiz-btn" disabled>Export</button>
       </div>
 
+      <div class="quizzer-resize-tl" title="Resize from top-left"></div>
+
       <div class="quizzer-status" id="quizzer-status">Paste or type notes in your notepad, then click “Quiz Me”.</div>
 
       <ol id="quiz-list" class="quizzer-questions"></ol>
 
       <label class="quizzer-answers-label">Your answers (1 per line, in order):</label>
       <textarea id="quiz-answers" class="quizzer-answers" placeholder="1) ...&#10;2) ..."></textarea>
+      <button id="submit-answers-btn" class="quizzer-submit">Submit</button>
     </div>
   </div>
-
 
   <!-- Modal -->
   <div id="eventModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal__panel" role="document">
       <div class="modal__header">
         <h3 id="modalTitle">Events</h3>
-        <button id="closeModal" class="icon-btn" aria-label="Close">✕</button>
+        <button type="button" id="closeModal" class="icon-btn" aria-label="Close">✕</button>
       </div>
 
       <div id="existingEvents" class="existing-events" aria-live="polite"></div>
@@ -174,8 +175,9 @@
     </div>
   </div>
 
-  <script src="js/calendar.js"></script>
-  <script src="js/notepad.js"></script>
+  <script src="js/calendar.js" defer></script>
+  <script src="js/notepad.js" defer></script>
   <script src="js/timer.js" defer></script>
+  <script src="js/ai-quizzer.js" defer></script>
 </body>
 </html>
