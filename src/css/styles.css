@@ -33,8 +33,12 @@ header {
   padding: 0 16px;
 }
 
+/* =========================
+   AI Quizzer Panel (refreshed)
+   ========================= */
+
 .quizzer {
-  position: fixed;
+  position: fixed; /* already fixed, ensures it’s a positioned container */
   right: 1rem;
   bottom: 1rem;
   width: 360px;
@@ -48,6 +52,17 @@ header {
   overflow: hidden;
   resize: both;              /* <-- resizable */
   z-index: 1100;            /* above your timer */
+}
+
+/* Top-left custom resizer handle */
+.quizzer-resize-tl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: #ccc;           /* a gray color to make it visible */
+  cursor: nwse-resize;        /* NW-SE diagonal resize cursor */
 }
 
 .quizzer-header {
@@ -84,6 +99,20 @@ header {
 .quizzer-answers {
   width: 100%; min-height: 70px; max-height: 150px; resize: vertical;
   padding: .5rem; border: 1px solid #e5e7eb; border-radius: 8px;
+}
+
+/* Style for the Submit button under the answers box */
+.quizzer-submit {
+  padding: .45rem .7rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #ffffff;   /* same blue as Quiz Me */
+  color: #000000;
+}
+.quizzer-submit:hover {
+  background: #bab2b2;   /* darker blue on hover (like Quiz Me hover) */
 }
 
 .modal.hidden { display: none; }

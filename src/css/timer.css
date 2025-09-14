@@ -67,17 +67,31 @@
   backdrop-filter: blur(6px);
 }
 
+/* Controls: visible and clickable by default (good for touch) */
 .tw-controls {
   position: absolute;
-  bottom: -0.6rem;
+  bottom: 0.5rem;
   display: flex;
   gap: .3rem;
   background: rgba(255,255,255,.85);
   border-radius: 999px;
   padding: .15rem .35rem;
-  opacity: 0;
-  pointer-events: none;
+  opacity: 1;
+  pointer-events: auto;
   transition: opacity .15s ease;
+}
+
+/* On devices that actually support hover, keep your hover-to-show behavior */
+@media (hover:hover) {
+  .tw-controls {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #timer-widget:hover .tw-controls,
+  #timer-widget:focus-within .tw-controls {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 .tw-controls button,
@@ -90,27 +104,19 @@
   border-radius: .4rem;
   cursor: pointer;
 }
-.tw-controls button:hover,
-.tw-settings:hover { background: rgba(0,0,0,.06); }
 
-/* background circle */
 #timer-widget::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: 50%;
+  top: -8px;   /* push out slightly */
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 16px; /* rounded corners */
   background: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,.12);
   z-index: -1;
 }
-
-#tw-dialog {
-  border: none;
-  border-radius: 12px;
-  padding: 1rem;
-  width: 260px;
-}
-#tw-dialog::backdrop { background: rgba(0,0,0,.3); }
 
 #tw-dialog h3 { margin: 0 0 .5rem; }
 #tw-dialog .tw-row { display: flex; gap: .5rem; margin-bottom: .5rem; }
@@ -126,3 +132,21 @@
   border: 1px solid #ddd; background: #fff; padding: .35rem .6rem; border-radius: .4rem; cursor: pointer;
 }
 #tw-dialog #tw-save { background: #4f46e5; color: #fff; border-color: #4f46e5; }
+
+/* Ensure the ring/time never intercept clicks */
+.tw-ring { pointer-events: none; z-index: 1; }
+.tw-time { pointer-events: none; z-index: 2; }
+
+/* Controls + settings always sit on top */
+.tw-controls, .tw-settings { z-index: 3; }
+
+/* Keep your hover-to-show behavior (already present) */
+#timer-widget:hover .tw-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Ensure ring never steals clicks */
+.tw-ring, .tw-ring * { pointer-events: none; }
+
+
