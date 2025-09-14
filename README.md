@@ -6,10 +6,6 @@ To run the **AI Quizzer**, first create a virtual environment and install depend
 
 > **Note:** Run the install commands from the **project root** (the folder that contains `requirements.txt`).
 
-You accidentally **never closed your code fences**. In Markdown, everything after an opening `stays inside the code block until you add a matching closing`—so the rest of your text looks “commented out.”
-
-Here’s a fixed version with matching fences, plus a Linux section that mirrors Windows and an added section for running FastAPI on Linux.
-
 ### Windows (PowerShell)
 
 ```powershell
@@ -41,3 +37,4 @@ uvicorn main:app --reload --host 127.0.0.1 --port 3001
 cd backend
 uvicorn main:app --reload --host 127.0.0.1 --port 3001
 ```
+
