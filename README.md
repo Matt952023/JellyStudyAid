@@ -10,7 +10,6 @@ You accidentally **never closed your code fences**. In Markdown, everything afte
 
 Here’s a fixed version with matching fences, plus a Linux section that mirrors Windows and an added section for running FastAPI on Linux.
 
-````markdown
 ### Windows (PowerShell)
 
 ```powershell
@@ -33,17 +32,18 @@ pip install -r requirements.txt
 
 ```powershell
 cd backend
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
+uvicorn main:app --reload --host 127.0.0.1 --port 3001
 ```
 
 ### Run FastAPI (Linux)
 
 ```bash
 cd backend
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
+uvicorn main:app --reload --host 127.0.0.1 --port 3001
 ```
 
 ````
+
 
 
 
