@@ -1,5 +1,5 @@
 :root {
-  --brand: #4a90e2;
+  --brand: #aecee6;
   --bg: #f4f4f9;
   --surface: #ffffff;
   --muted: #eaeaea;
@@ -23,7 +23,6 @@ header {
   padding: 1rem 1.25rem;
   font-size: 2.25rem;
   font-family: 'Baloo 2', cursive;
-  -webkit-text-stroke: 2px black;
   text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
 }
 
@@ -37,40 +36,52 @@ header {
    AI Quizzer Panel (refreshed)
    ========================= */
 
+/* Base panel: switch to 3-row grid (header | body | footer) */
 .quizzer {
-  position: fixed; /* already fixed, ensures it’s a positioned container */
+  position: fixed;
   right: 1rem;
   bottom: 1rem;
   width: 360px;
   height: 420px;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;  /* header, scrollable body, footer */
+
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,.12);
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  resize: both;              /* <-- resizable */
-  z-index: 1100;            /* above your timer */
+  resize: both;
+  z-index: 1100;
+
+  /* keep footer from getting pushed out when shrinking */
+  --quizzer-header-min: 48px;
+  --quizzer-footer-min: 56px;
+  min-width: 280px;
+  min-height: calc(var(--quizzer-header-min) + var(--quizzer-footer-min));
 }
 
-/* Top-left custom resizer handle */
+/* Top-left custom resizer handle (unchanged) */
 .quizzer-resize-tl {
   position: absolute;
   top: 0;
   left: 0;
   width: 12px;
   height: 12px;
-  background: #ccc;           /* a gray color to make it visible */
-  cursor: nwse-resize;        /* NW-SE diagonal resize cursor */
+  background: #ccc;
+  cursor: nwse-resize;
 }
 
+/* Header (unchanged, but ensure min height reads the var) */
 .quizzer-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: .5rem .75rem;
   background: #f8fafc;
   border-bottom: 1px solid #e5e7eb;
   font-weight: 600;
+  min-height: var(--quizzer-header-min);
+  box-sizing: border-box;
 }
 
 .quizzer-actions button {
@@ -81,7 +92,17 @@ header {
 }
 .quizzer-actions button:hover { background: #e2e8f0; }
 
-.quizzer-body { padding: .75rem; display: flex; flex-direction: column; gap: .5rem; height: 100%; }
+/* BODY: now the only scrollable area */
+.quizzer-body {
+  padding: .75rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  overflow: auto;   /* key change */
+  min-height: 0;    /* allow shrinking inside grid */
+}
+
+/* Controls (unchanged) */
 .quizzer-controls { display: flex; gap: .5rem; }
 #quiz-me-btn, #export-quiz-btn {
   padding: .45rem .7rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;
@@ -92,7 +113,14 @@ header {
 #export-quiz-btn[disabled] { opacity: .5; cursor: not-allowed; }
 
 .quizzer-status { font-size: .9rem; color: #475569; }
-.quizzer-questions { margin: .25rem 0; padding-left: 1.25rem; flex: 1; overflow: auto; }
+
+/* Let the body handle scrolling; don't create a nested scroller here */
+.quizzer-questions {
+  margin: .25rem 0;
+  padding-left: 1.25rem;
+  overflow: visible;       /* was: auto */
+  flex: 0 0 auto;          /* was: flex: 1; */
+}
 .quizzer-questions li { margin: .25rem 0 .5rem; }
 
 .quizzer-answers-label { font-size: .85rem; color: #334155; }
@@ -101,19 +129,30 @@ header {
   padding: .5rem; border: 1px solid #e5e7eb; border-radius: 8px;
 }
 
-/* Style for the Submit button under the answers box */
+/* NEW: Footer pinned at bottom of the panel */
+.quizzer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+  min-height: var(--quizzer-footer-min);
+  box-sizing: border-box;
+}
+
+/* Submit button style (unchanged) */
 .quizzer-submit {
   padding: .45rem .7rem;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  background: #ffffff;   /* same blue as Quiz Me */
+  background: #ffffff;
   color: #000000;
 }
-.quizzer-submit:hover {
-  background: #bab2b2;   /* darker blue on hover (like Quiz Me hover) */
-}
+.quizzer-submit:hover { background: #bab2b2; }
 
 .modal.hidden { display: none; }
 .modal {
