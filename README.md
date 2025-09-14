@@ -41,12 +41,3 @@ uvicorn main:app --reload --host 127.0.0.1 --port 3001
 cd backend
 uvicorn main:app --reload --host 127.0.0.1 --port 3001
 ```
-
-````
-
-
-
-
-
-
-
