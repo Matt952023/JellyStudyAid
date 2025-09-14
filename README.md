@@ -14,6 +14,7 @@ source venv/bin/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
-Next, run the FastAPI with the venv active inside the <backend> directory
+Next, run the FastAPI with the venv active inside the <backend> directory:
 uvicorn main:app --reload --host 127.0.0.1 --port 8000
+
 
