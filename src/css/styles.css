@@ -36,30 +36,28 @@ header {
    AI Quizzer Panel (refreshed)
    ========================= */
 
-/* Base panel: switch to 3-row grid (header | body | footer) */
+/* Base panel: 2-row grid (header | body). Bottom stays anchored via bottom: 1rem */
 .quizzer {
   position: fixed;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 1rem;           /* keeps panel from moving below its original bottom */
   width: 360px;
   height: 420px;
 
   display: grid;
-  grid-template-rows: auto 1fr auto;  /* header, scrollable body, footer */
+  grid-template-rows: auto 1fr;  /* header + scrollable body */
 
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,.12);
   overflow: hidden;
-  resize: both;
+  resize: both;                   /* native resize handle (bottom-right) */
   z-index: 1100;
 
-  /* keep footer from getting pushed out when shrinking */
   --quizzer-header-min: 48px;
-  --quizzer-footer-min: 56px;
   min-width: 280px;
-  min-height: calc(var(--quizzer-header-min) + var(--quizzer-footer-min));
+  min-height: var(--quizzer-header-min); /* header-only minimum */
 }
 
 /* Top-left custom resizer handle (unchanged) */
@@ -73,7 +71,7 @@ header {
   cursor: nwse-resize;
 }
 
-/* Header (unchanged, but ensure min height reads the var) */
+/* Header (ensure a predictable min height) */
 .quizzer-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: .5rem .75rem;
@@ -92,14 +90,14 @@ header {
 }
 .quizzer-actions button:hover { background: #e2e8f0; }
 
-/* BODY: now the only scrollable area */
+/* BODY: the only scroll area; Submit lives here so it hides when minimized */
 .quizzer-body {
   padding: .75rem;
   display: flex;
   flex-direction: column;
   gap: .5rem;
-  overflow: auto;   /* key change */
-  min-height: 0;    /* allow shrinking inside grid */
+  overflow: auto;  /* key: scroll inside, never outside the panel */
+  min-height: 0;   /* allow the grid to shrink the body fully */
 }
 
 /* Controls (unchanged) */
@@ -114,12 +112,12 @@ header {
 
 .quizzer-status { font-size: .9rem; color: #475569; }
 
-/* Let the body handle scrolling; don't create a nested scroller here */
+/* Let the BODY handle scrolling; avoid nested scrollers */
 .quizzer-questions {
   margin: .25rem 0;
   padding-left: 1.25rem;
-  overflow: visible;       /* was: auto */
-  flex: 0 0 auto;          /* was: flex: 1; */
+  overflow: visible;  /* was: auto */
+  flex: 0 0 auto;     /* was: flex: 1; */
 }
 .quizzer-questions li { margin: .25rem 0 .5rem; }
 
@@ -129,20 +127,7 @@ header {
   padding: .5rem; border: 1px solid #e5e7eb; border-radius: 8px;
 }
 
-/* NEW: Footer pinned at bottom of the panel */
-.quizzer-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 10px 12px;
-  border-top: 1px solid #e5e7eb;
-  background: #fff;
-  min-height: var(--quizzer-footer-min);
-  box-sizing: border-box;
-}
-
-/* Submit button style (unchanged) */
+/* Submit button stays in the body (not a footer) */
 .quizzer-submit {
   padding: .45rem .7rem;
   border: none;
@@ -153,6 +138,16 @@ header {
   color: #000000;
 }
 .quizzer-submit:hover { background: #bab2b2; }
+
+/* Minimized state: hide the body so only the header shows (Submit hidden) */
+.quizzer.is-minimized,
+.quizzer.min {
+  height: var(--quizzer-header-min);
+  grid-template-rows: auto 0fr;
+  overflow: hidden;
+}
+.quizzer.is-minimized .quizzer-body,
+.quizzer.min .quizzer-body { display: none; }
 
 .modal.hidden { display: none; }
 .modal {
